@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Long> {
-  // @Query(value = "SELECT * FROM users WHERE username = :username", nativeQuery=true)
-  // public User findByUsername(@Param("username") String username);
+  @Query(value = "SELECT * FROM users", nativeQuery=true)
+  public Iterable<User> findAllUsers();
   User findByUsername(String username);
 }

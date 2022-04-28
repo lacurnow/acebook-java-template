@@ -1,5 +1,7 @@
 package com.makersacademy.acebook.model;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.GenerationType;
 import lombok.Data;
@@ -17,7 +18,6 @@ import lombok.Data;
 @Entity
 @Table(name = "POSTS")
 public class Post {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -30,7 +30,7 @@ public class Post {
     private Timestamp timestamp;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="userid")
+    @JoinColumn(name="userid") 
     private User user;
 
     public Post() {}
@@ -38,6 +38,13 @@ public class Post {
     public Post(String content) {
         this.content = content;
     }
+
+    public void generateTimestamp() {
+        long now = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(now);
+        this.timestamp = timestamp;
+    }
+
     public String getContent() { return this.content; }
     public void setContent(String content) { this.content = content; }
     public Timestamp getTimestamp() { return this.timestamp; }
@@ -46,9 +53,4 @@ public class Post {
     public void setUser(User user) { this.user = user;  }
     public Long getId() {return this.id; }
     
-    public void generateTimestamp() {
-        long now = System.currentTimeMillis();
-        Timestamp timestamp = new Timestamp(now);
-        this.timestamp = timestamp;
-    }
 }
