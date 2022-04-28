@@ -32,11 +32,13 @@ public class Post {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="userid") 
     private User user;
+    private String imagepath;
 
     public Post() {}
 
-    public Post(String content) {
+    public Post(String content, String imagepath) {
         this.content = content;
+        this.imagepath = imagepath;
     }
 
     public void generateTimestamp() {
@@ -47,10 +49,14 @@ public class Post {
 
     public String getContent() { return this.content; }
     public void setContent(String content) { this.content = content; }
-    public Timestamp getTimestamp() { return this.timestamp; }
-    
+
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user;  }
     public Long getId() {return this.id; }
+
+
+    public String getImagepath() { return this.imagepath; }
+    public void setImagepath(String imagepath) { this.imagepath = imagepath; }
+
     
 }

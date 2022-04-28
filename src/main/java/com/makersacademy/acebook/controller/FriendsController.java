@@ -31,7 +31,7 @@ public class FriendsController {
   @GetMapping("/friends")
   public String index(Model model) {
     Iterable<User> users = userRepository.findAllUsers();
-    Iterable<Friend> friends = friendsRepository.findAllFriends();
+    // Iterable<Friend> friends = friendsRepository.findAllFriends();
     model.addAttribute("users", users);
     model.addAttribute("user", new User());
     return "friends/index";
