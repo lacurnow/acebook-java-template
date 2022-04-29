@@ -78,10 +78,14 @@
     position: relative;
     top: 18px;
     left: 10px;
+    font-size: 30px;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: bold;
   }
 
-  .header h1, .navbar a, h1 {
+  .header, .navbar a, h1 {
     font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
   }
 
   .title {
@@ -91,4 +95,15 @@
 
   .logout {
     text-align: center;
+  }
+
+  html {
+    font-family: 'Akshar', sans-serif;
+    font-size: 18px;
+  }
+
+  #contentbox {
+    height:100px;
+    width: 100%;
+    font-size:14pt;
   }
