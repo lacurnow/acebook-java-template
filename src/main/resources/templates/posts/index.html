@@ -33,21 +33,21 @@
 
 
     <div class="signin" sec:authorize="isAuthenticated()">
-        Signed in as <span sec:authentication="name"></span>
+        Signed in as <b><span sec:authentication="name"></span></b>
     </div>
 
     <form action="#" th:action="@{/posts}" th:object="${post}" method="post">
         <h3>Write a post:</h3>
-        <p>Content: <input type="text" th:field="*{content}" /></p>
+        <p>Content: <input id="contentbox" type="text" th:field="*{content}" /></p>
         <h3>Include a photo to be posted:</h3>
         <label for="imagepath">Select a file:</label>
         <input type="file" id="imagepath" name="imagepath" th:field="*{imagepath}"><br>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
-
+    <hr>
     <ul th:each="post: ${posts}">
         <div th:unless="${post.content == '' && post.imagepath == ''}">
-            <li th:inline="text">[[${post.user.username}]] on [[${post.formatTimestamp()}]]:</li>
+             <p id="posttitle"><th:inline="text">[[${post.user.username}]] on [[${post.formatTimestamp()}]]:</p>
             <div th:unless="${post.content == ''}">
                 <h3><blockquote th:text="${post.content}"></blockquote></h3>
             </div>
@@ -126,9 +126,9 @@
             </div>
             <ul>   
                 <form action="#" th:action="@{/comments}" th:object="${comment}" method="post">
-                    <li><p>Write a comment: <input type="text" th:field="*{content}" />
+                    <p>Write a comment: <input type="text" th:field="*{content}" />
                     <input type="hidden" name="postid" th:value="${post.id}" />
-                    <input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p></li>
+                    <input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
                 </form>
             </ul>
             <hr>
