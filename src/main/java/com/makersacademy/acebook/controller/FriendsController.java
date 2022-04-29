@@ -1,5 +1,6 @@
 package com.makersacademy.acebook.controller;
 import java.security.Principal;
+import java.util.Optional;
 
 import com.makersacademy.acebook.model.Friend;
 import com.makersacademy.acebook.model.User;
@@ -8,9 +9,7 @@ import com.makersacademy.acebook.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -37,9 +36,11 @@ public class FriendsController {
     return "friends/index";
   }
 
-  @PostMapping("/friends")
-  public RedirectView create(@ModelAttribute User user, Principal principal) {
-    User currentUser = getUser(principal);
+  @PostMapping("/friends/add-friend")
+  public RedirectView create(@RequestParam String friend, Principal principal) {
+    User newFriend = userRepository.findByUsername(friend);
+    Friend friendToAdd = new Friend(newFriend);
+    friendToAdd.setUser(getUser(principal));
     return new RedirectView("/friends");
   }
 }

@@ -37,7 +37,6 @@ public class Friend {
 
   public User getUser() { return user; }
   public void setUser(User user) { this.user = user;  }
-  // public void setFriendId() { this.friendId = friend.getId(); }
   public Long getFriendId() { return this.friendId; }
 
 }

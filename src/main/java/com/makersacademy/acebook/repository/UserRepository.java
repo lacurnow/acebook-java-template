@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Long> {
   @Query(value = "SELECT * FROM users", nativeQuery=true)
-  public Iterable<User> findAllUsers();
+  public Iterable<User> findAllUsers();;
   User findByUsername(String username);
 }

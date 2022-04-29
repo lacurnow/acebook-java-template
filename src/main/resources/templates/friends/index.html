@@ -31,7 +31,9 @@ s<!DOCTYPE html>
     <h3>Add Friends</h3>
     <ul th:each="user: ${users}">
       <a th:text="${user.username}" ></a>
-      <button type="button">Add</button>
+      <div class="button"><form action="#" th:action="@{/friends/add-friend(friend=${user.username})}" method="post">
+          <input type="submit" value="Add" id="*{user.username}" />
+      </form></div>
     </ul>
 
     </body>
