@@ -55,9 +55,31 @@
                 <blockquote><img th:src="${post.imagepath}" /></blockquote>
             </div>
             <div th:switch="${post.likes}">
-                <div th:case="'0'">Be the first to like this</div>
-                <div th:case="'1'">Liked by 1 person</div>
-                <div th:case="*">Liked by [[${post.likes}]] people</div>
+                <div th:case="'0'">Be the first to like this</div> 
+                <div th:case="'1'">
+                    <details>
+                        <summary>Liked by 1 person</summary>
+                        <div th:each="user: ${users}">
+                            <div th:if="${user.getLikedPostids().contains(post.id)}">
+                                <ul>
+                                    <li th:text="${user.username}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <div th:case="*">
+                    <details>
+                        <summary>Liked by [[${post.likes}]] people</summary>
+                        <div th:each="user: ${users}">
+                            <div th:if="${user.getLikedPostids().contains(post.id)}">
+                                <ul>
+                                    <li th:text="${user.username}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+                </div>
             </div>
             <div th:unless="${user.getLikedPostids().contains(post.id)}">
                 <form action="#" th:action="@{/likes}" th:object="${like}" method="post">

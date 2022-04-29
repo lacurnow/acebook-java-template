@@ -42,11 +42,13 @@ public class PostsController {
     @GetMapping("/posts")
     public String index(Model model, Principal principal) {
         Iterable<Post> posts = postRepository.findAllByOrderByTimestampDesc();
+        Iterable<User> users = userRepository.findAll();
         Iterable<Comment> comments = commentRepository.findAllByOrderByTimestampAsc();
         User user = getUser(principal);
         model.addAttribute("posts", posts);
         model.addAttribute("post", new Post());
         model.addAttribute("user", user);
+        model.addAttribute("users", users);
         model.addAttribute("like", new Like());
         model.addAttribute("comments", comments);
         model.addAttribute("comment", new Comment());
