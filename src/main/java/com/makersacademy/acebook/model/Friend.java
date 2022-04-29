@@ -27,16 +27,13 @@ public class Friend {
   @JoinColumn(name="userid")
   private User user;
 
-  public Friend(User friend) {
-    User newFriend = friend;
-  }
+  public Friend(){}
 
-  public void Long (User friend) {
-    friendId = friend.getId();
+  public Friend(User friend) {
+    this.friendId = friend.getId();
   }
 
   public User getUser() { return user; }
   public void setUser(User user) { this.user = user;  }
-  public Long getFriendId() { return this.friendId; }
 
 }

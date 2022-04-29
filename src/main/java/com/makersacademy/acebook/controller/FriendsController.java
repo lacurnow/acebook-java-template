@@ -41,6 +41,7 @@ public class FriendsController {
     User newFriend = userRepository.findByUsername(friend);
     Friend friendToAdd = new Friend(newFriend);
     friendToAdd.setUser(getUser(principal));
+    friendsRepository.save(friendToAdd);
     return new RedirectView("/friends");
   }
 }
