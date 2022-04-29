@@ -97,16 +97,34 @@
             </div>
             <div th:switch="${post.commentcount}">
                 <p th:case="'0'">No comments yet</p>
-                <p th:case="'1'">1 comment:</p>
-                <p th:case="*">[[${post.commentcount}]] comments:</p>
-            </div>
-            <ul>
-                <div th:each="comment: ${comments}">
-                    <div th:if="${comment.postid == post.id}">
-                        <li th:inline="text">[[${comment.user.username}]] on [[${comment.formatTimestamp()}]]:</li>
-                        <blockquote th:text="${comment.content}"></blockquote>
-                    </div>
+                <div th:case="'1'">
+                    <details>
+                        <p><summary>1 comment</summary></p>
+                        <div th:each="comment: ${comments}">
+                            <div th:if="${comment.postid == post.id}">
+                                <ul>
+                                    <li th:inline="text">[[${comment.user.username}]] on [[${comment.formatTimestamp()}]]:</li>
+                                    <blockquote th:text="${comment.content}"></blockquote>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
                 </div>
+                <div th:case="*">
+                    <details>
+                        <p><summary>[[${post.commentcount}]] comments</summary></p>
+                        <div th:each="comment: ${comments}">
+                            <div th:if="${comment.postid == post.id}">
+                                <ul>
+                                    <li th:inline="text">[[${comment.user.username}]] on [[${comment.formatTimestamp()}]]:</li>
+                                    <blockquote th:text="${comment.content}"></blockquote>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <ul>   
                 <form action="#" th:action="@{/comments}" th:object="${comment}" method="post">
                     <p>Write a comment: <input type="text" th:field="*{content}" />
                     <input type="hidden" name="postid" th:value="${post.id}" />
