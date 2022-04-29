@@ -47,7 +47,7 @@
     <hr>
     <ul th:each="post: ${posts}">
         <div th:unless="${post.content == '' && post.imagepath == ''}">
-            <li th:inline="text">[[${post.user.username}]] on [[${post.formatTimestamp()}]]:</li>
+             <p id="posttitle"><th:inline="text">[[${post.user.username}]] on [[${post.formatTimestamp()}]]:</p>
             <div th:unless="${post.content == ''}">
                 <h3><blockquote th:text="${post.content}"></blockquote></h3>
             </div>
@@ -86,9 +86,9 @@
                     </div>
                 </div>
                 <form action="#" th:action="@{/comments}" th:object="${comment}" method="post">
-                    <li><p>Write a comment: <input type="text" th:field="*{content}" />
+                    <p>Write a comment: <input type="text" th:field="*{content}" />
                     <input type="hidden" name="postid" th:value="${post.id}" />
-                    <input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p></li>
+                    <input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
                 </form>
             </ul>
             <hr>
